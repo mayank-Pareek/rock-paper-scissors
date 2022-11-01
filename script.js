@@ -24,5 +24,28 @@ let playRound = function(){
      else return "human";
   };
   
+  let game = function(){
+    let human=0,com=0;
+    for(let i=0;i<5;i++){
+      let result=playRound();
+      if(result==="human") {
+        console.log('You won this round');
+        human++;
+      }
+      else if(result ==="com"){
+        console.log('Computer won this round');
+        com++;
+      }
+      else {
+        console.log('This round ties');
+  human++;
+      com++;}
+    }
+    if(human>com)console.log("You won");
+    else if(com>human)console.log("Computer won");
+    else console.log("Match tied");
+  }
+  
+  game();
  
 
