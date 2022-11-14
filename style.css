@@ -1,0 +1,46 @@
+body{
+    text-align:center;
+}
+
+.header{
+    display:flex;
+    justify-content:center ;
+    align-items:center;
+    height:200px;
+}
+
+.header h2{
+    font-size:50px;
+    color:aqua;
+}
+
+.options{
+    height:200px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:200px;
+}
+
+.options button{
+    padding:30px 80px;
+    border-radius:15px;
+}
+
+.game h2{
+    font-size:40px;
+    word-spacing: 200px;
+}
+
+.score{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:500px;
+    
+}
+.humanScore,
+.comScore{
+    padding:30px 50px;
+    background-color: beige;
+}
