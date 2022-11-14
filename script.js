@@ -10,10 +10,10 @@ let getComChoice = function () {
   }
 };
 
-let getHumanChoice = function () {
-  let choice = prompt("Please enter your choice");
-  return choice.toLowerCase();
-};
+// let getHumanChoice = function () {
+//   let choice = prompt("Please enter your choice");
+//   return choice.toLowerCase();
+// };
 
 let playRound = function () {
   let com = getComChoice();
