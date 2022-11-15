@@ -1,6 +1,8 @@
 let rock = document.querySelector("#rock");
 let paper = document.querySelector("#paper");
 let scissor = document.querySelector("#scissor");
+let humanScore=document.querySelector(".humanScore");
+let comScore=document.querySelector(".comScore");
 let humanEmoji = document.querySelector(".humanChoice");
 let comEmoji = document.querySelector(".comChoice");
 
@@ -26,12 +28,10 @@ let applyEmoji = function (playerEmoji, choice) {
     playerEmoji.innerHTML = "✊";
   } else if (choice === "paper") {
     playerEmoji.innerHTML = "✋";
-    console.log(playerEmoji);
   } else {
     playerEmoji.innerHTML = "✌️";
   }
-  console.log(playerEmoji);
-  console.log(choice);
+
 };
 
 let playRound = function (humanChoice) {
@@ -39,7 +39,6 @@ let playRound = function (humanChoice) {
   let human = humanChoice;
   applyEmoji(comEmoji,com);
   applyEmoji(humanEmoji,humanChoice);
-  console.log(humanEmoji);
   console.log(`You chose ${human} and computer chose ${com}`);
   if (com === human) {
     return "tie";
@@ -55,7 +54,6 @@ let playRound = function (humanChoice) {
 let game = function (humanChoice) {
   let human = 0,
     com = 0;
-  for (let i = 0; i < 1; i++) {
     let result = playRound(humanChoice);
     if (result === "human") {
       console.log("You won this round");
@@ -67,7 +65,9 @@ let game = function (humanChoice) {
       console.log("This round ties");
       human++;
       com++;
-    }
+    
+    humanScore.innerHTML=human;
+    comScore.innerHTML=com;
   }
   if (human > com) {
     result.innerHtml = "You won";
