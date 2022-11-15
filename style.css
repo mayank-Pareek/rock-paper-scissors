@@ -32,15 +32,28 @@ body{
     word-spacing: 200px;
 }
 
-.score{
+.score,
+.choices{
     display:flex;
     justify-content:center;
     align-items:center;
     gap:500px;
     
 }
+
+.choices{
+
+    margin-top:40px;
+}
 .humanScore,
 .comScore{
+    padding:30px 50px;
+    background-color: beige;
+}
+
+.humanChoice,
+.comChoice{
+    font-size:50px;
     padding:30px 50px;
     background-color: beige;
 }

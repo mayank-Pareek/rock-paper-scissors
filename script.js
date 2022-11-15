@@ -1,3 +1,10 @@
+let rock = document.querySelector("#rock");
+let paper = document.querySelector("#paper");
+let scissor = document.querySelector("#scissor");
+let humanEmoji = document.querySelector(".humanChoice");
+let comEmoji = document.querySelector(".comChoice");
+
+result = document.querySelector(".result");
 let getComChoice = function () {
   let randomNum = Math.floor(Math.random() * 3);
   switch (randomNum) {
@@ -14,10 +21,25 @@ let getComChoice = function () {
 //   let choice = prompt("Please enter your choice");
 //   return choice.toLowerCase();
 // };
+let applyEmoji = function (playerEmoji, choice) {
+  if (choice === "rock") {
+    playerEmoji.innerHTML = "✊";
+  } else if (choice === "paper") {
+    playerEmoji.innerHTML = "✋";
+    console.log(playerEmoji);
+  } else {
+    playerEmoji.innerHTML = "✌️";
+  }
+  console.log(playerEmoji);
+  console.log(choice);
+};
 
-let playRound = function () {
+let playRound = function (humanChoice) {
   let com = getComChoice();
-  let human = getHumanChoice();
+  let human = humanChoice;
+  applyEmoji(comEmoji,com);
+  applyEmoji(humanEmoji,humanChoice);
+  console.log(humanEmoji);
   console.log(`You chose ${human} and computer chose ${com}`);
   if (com === human) {
     return "tie";
@@ -30,11 +52,11 @@ let playRound = function () {
   } else return "human";
 };
 
-let game = function () {
+let game = function (humanChoice) {
   let human = 0,
     com = 0;
-  for (let i = 0; i < 5; i++) {
-    let result = playRound();
+  for (let i = 0; i < 1; i++) {
+    let result = playRound(humanChoice);
     if (result === "human") {
       console.log("You won this round");
       human++;
@@ -48,12 +70,21 @@ let game = function () {
     }
   }
   if (human > com) {
-    console.log("You won");
+    result.innerHtml = "You won";
   } else if (com > human) {
-    console.log("Computer won");
+    result.innerHtml = "Computer won";
   } else {
-    console.log("Match tied");
+    result.innerHtml = "Match tied";
   }
 };
 
-game();
+rock.addEventListener("click", function () {
+  game("rock");
+});
+
+paper.addEventListener("click", function () {
+  game("paper");
+});
+scissor.addEventListener("click", function () {
+  game("scissor");
+});
