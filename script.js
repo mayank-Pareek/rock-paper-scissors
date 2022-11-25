@@ -1,12 +1,14 @@
 let rock = document.querySelector("#rock");
 let paper = document.querySelector("#paper");
 let scissor = document.querySelector("#scissor");
-let humanScore=document.querySelector(".humanScore");
-let comScore=document.querySelector(".comScore");
+let humanScore = document.querySelector(".humanScore");
+let comScore = document.querySelector(".comScore");
 let humanEmoji = document.querySelector(".humanChoice");
 let comEmoji = document.querySelector(".comChoice");
-
-result = document.querySelector(".result");
+let buttons = document.querySelector(".buttons");
+let result = document.querySelector(".result");
+let options = document.querySelector(".options");
+let heading = document.querySelector("#heading");
 let getComChoice = function () {
   let randomNum = Math.floor(Math.random() * 3);
   switch (randomNum) {
@@ -19,10 +21,7 @@ let getComChoice = function () {
   }
 };
 
-// let getHumanChoice = function () {
-//   let choice = prompt("Please enter your choice");
-//   return choice.toLowerCase();
-// };
+
 let applyEmoji = function (playerEmoji, choice) {
   if (choice === "rock") {
     playerEmoji.innerHTML = "✊";
@@ -31,60 +30,57 @@ let applyEmoji = function (playerEmoji, choice) {
   } else {
     playerEmoji.innerHTML = "✌️";
   }
-
 };
 
 let playRound = function (humanChoice) {
-  let com = getComChoice();
-  let human = humanChoice;
-  applyEmoji(comEmoji,com);
-  applyEmoji(humanEmoji,humanChoice);
-  console.log(`You chose ${human} and computer chose ${com}`);
-  if (com === human) {
-    return "tie";
-  } else if (
-    (com === "rock" && human === "scissor") ||
-    (com === "scissor" && human === "paper") ||
-    (com === "paper" && human === "rock")
-  ) {
-    return "com";
-  } else return "human";
-};
-
-let game = function (humanChoice) {
-  let human = 0,
-    com = 0;
-    let result = playRound(humanChoice);
-    if (result === "human") {
-      console.log("You won this round");
-      human++;
-    } else if (result === "com") {
-      console.log("Computer won this round");
-      com++;
+  if (humanPoints !== 5 && comPoints !== 5) {
+    let com = getComChoice();
+    let human = humanChoice;
+    applyEmoji(comEmoji, com);
+    applyEmoji(humanEmoji, humanChoice);
+    result.innerHTML = `You chose ${human} and computer chose ${com}`;
+    if (com === human) {
+      heading.innerHTML = "This round ties";
+      comPoints++;
+      humanPoints++;
+    } else if (
+      (com === "rock" && human === "scissor") ||
+      (com === "scissor" && human === "paper") ||
+      (com === "paper" && human === "rock")
+    ) {
+      heading.innerHTML = "Computer won this round";
+      comPoints++;
     } else {
-      console.log("This round ties");
-      human++;
-      com++;
-    
-    humanScore.innerHTML=human;
-    comScore.innerHTML=com;
-  }
-  if (human > com) {
-    result.innerHtml = "You won";
-  } else if (com > human) {
-    result.innerHtml = "Computer won";
+      heading.innerHTML = "You won this round";
+      humanPoints++;
+    }
+    humanScore.innerHTML = humanPoints;
+    comScore.innerHTML = comPoints;
+  } else gameResult();
+};
+
+let gameResult = function () {
+  buttons.innerHTML = " ";
+  options.innerHTML = " ";
+  result.innerHTML = " ";
+  if (humanPoints > comPoints) {
+    heading.innerHTML = "Game Over! You won";
+  } else if (comPoints > humanPoints) {
+    heading.innerHTML = "Game Over! Computer won";
   } else {
-    result.innerHtml = "Match tied";
+    heading.innerHTML = "Game Over! Match tied";
   }
 };
 
+let humanPoints = 0,
+  comPoints = 0;
 rock.addEventListener("click", function () {
-  game("rock");
+  playRound("rock");
 });
 
 paper.addEventListener("click", function () {
-  game("paper");
+  playRound("paper");
 });
 scissor.addEventListener("click", function () {
-  game("scissor");
+  playRound("scissor");
 });
