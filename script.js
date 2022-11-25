@@ -21,7 +21,6 @@ let getComChoice = function () {
   }
 };
 
-
 let applyEmoji = function (playerEmoji, choice) {
   if (choice === "rock") {
     playerEmoji.innerHTML = "✊";
@@ -33,30 +32,31 @@ let applyEmoji = function (playerEmoji, choice) {
 };
 
 let playRound = function (humanChoice) {
-  if (humanPoints !== 5 && comPoints !== 5) {
-    let com = getComChoice();
-    let human = humanChoice;
-    applyEmoji(comEmoji, com);
-    applyEmoji(humanEmoji, humanChoice);
-    result.innerHTML = `You chose ${human} and computer chose ${com}`;
-    if (com === human) {
-      heading.innerHTML = "This round ties";
-      comPoints++;
-      humanPoints++;
-    } else if (
-      (com === "rock" && human === "scissor") ||
-      (com === "scissor" && human === "paper") ||
-      (com === "paper" && human === "rock")
-    ) {
-      heading.innerHTML = "Computer won this round";
-      comPoints++;
-    } else {
-      heading.innerHTML = "You won this round";
-      humanPoints++;
-    }
-    humanScore.innerHTML = humanPoints;
-    comScore.innerHTML = comPoints;
-  } else gameResult();
+  let com = getComChoice();
+  let human = humanChoice;
+  applyEmoji(comEmoji, com);
+  applyEmoji(humanEmoji, humanChoice);
+  result.innerHTML = `You chose ${human} and computer chose ${com}`;
+  if (com === human) {
+    heading.innerHTML = "This round ties";
+    comPoints++;
+    humanPoints++;
+  } else if (
+    (com === "rock" && human === "scissor") ||
+    (com === "scissor" && human === "paper") ||
+    (com === "paper" && human === "rock")
+  ) {
+    heading.innerHTML = "Computer won this round";
+    comPoints++;
+  } else {
+    heading.innerHTML = "You won this round";
+    humanPoints++;
+  }
+  humanScore.innerHTML = humanPoints;
+  comScore.innerHTML = comPoints;
+  if (humanPoints === 5 || comPoints === 5) {
+    gameResult();
+  }
 };
 
 let gameResult = function () {
